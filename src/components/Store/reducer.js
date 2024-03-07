@@ -8,7 +8,6 @@ const init = {
         oWins: 0,
     },
 }
-console.log('init', init)
 
 const reducer = (state = init, action) => {
     switch (action.type) {

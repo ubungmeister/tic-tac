@@ -26,9 +26,6 @@ const Game = () => {
     const history = [Array(9).fill(null)] // ?
     const winner = calculateWinner()
 
-    console.log('winner', winner)
-    console.log('history', history)
-
     //store winnings to redux
     useEffect(() => {
         if (winner === 'X') {
@@ -51,8 +48,6 @@ const Game = () => {
 
         const squares = [...current]
 
-        console.log('squares', squares, historyPoint)
-
         if (winner || squares[i]) return
         // select square
         squares[i] = xO
@@ -67,18 +62,25 @@ const Game = () => {
         addPlayer(!xIsNext)
     }
 
-    console.log('gameHistory', gameHistory.length)
+    const handleSettingsClick = () => {
+        if (gameHistory.length <= 1 || winner) {
+            setIsSettingsOpen(true)
+        }
+    }
 
     return (
         <>
             <h1>Tic Tac Tao with React-Redux</h1>
             <div className="headerMenu-wrapper">
-                <button
-                    disabled={gameHistory.length > 1 && !winner}
-                    onClick={() => setIsSettingsOpen(true)}
+                <h4
+                    style={{
+                        cursor: 'pointer',
+                        color: gameHistory.length > 1 && !winner && 'gray',
+                    }}
+                    onClick={handleSettingsClick}
                 >
                     Settings
-                </button>
+                </h4>
                 {isSettingsOpen && <Settings setSettings={setIsSettingsOpen} />}
                 <h4
                     onClick={() => {
@@ -86,17 +88,21 @@ const Game = () => {
                     }}
                     style={{ cursor: 'pointer' }}
                 >
-                    Reset Game
+                    Reset
                 </h4>
             </div>
             <Board onClick={handleClick} />
             <div className="info-wrapper">
-                <h3>{winner ? 'Winner: ' + winner : 'Next Player: ' + xO}</h3>
-                <button onClick={() => newGame(game)}>New Game</button>
-
-                <div>Winnings </div>
-                <div>X wins {winnings.xWins}</div>
-                <div>O wins {winnings.oWins}</div>
+                <div className="info-win-wrapper">
+                    <h3>
+                        {winner ? 'Winner: ' + winner : 'Next Player: ' + xO}
+                    </h3>
+                    <h3>X player wins {winnings.xWins}</h3>
+                    <h3>O player wins {winnings.oWins}</h3>
+                </div>
+                <h4 style={{ cursor: 'pointer' }} onClick={() => newGame(game)}>
+                    New Game
+                </h4>
             </div>
         </>
     )

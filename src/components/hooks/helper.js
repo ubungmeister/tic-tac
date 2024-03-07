@@ -11,9 +11,10 @@ const useHook = () => {
         // Horizontal and Vertical
         for (let i = 0; i < size; i++) {
             for (let j = 0; j <= size - 3; j++) {
-                console.log(i * size + j)
                 // Horizontal
                 lines.push([i * size + j, i * size + j + 1, i * size + j + 2])
+            }
+            for (let j = 0; j <= size - 3; j++) {
                 // Vertical
                 lines.push([
                     j * size + i,
@@ -33,11 +34,13 @@ const useHook = () => {
                     (i + 2) * size + j + 2,
                 ])
                 // Right to Left
-                lines.push([
-                    (i + 2) * size + j,
-                    (i + 1) * size + j + 1,
-                    i * size + j + 2,
-                ])
+                for (let j = 0; j <= size - 3; j++) {
+                    lines.push([
+                        (i + 2) * size + j,
+                        (i + 1) * size + j + 1,
+                        i * size + j + 2,
+                    ])
+                }
             }
         }
 

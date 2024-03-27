@@ -65,6 +65,7 @@ const useCart = () => {
 
     // on select the game size
     const setGame = (item) => {
+        console.log(item)
         dispatch(setGameInfo(item))
         dispatch(setStepCount(0))
         dispatch(setGameHistory([Array(item.length).fill(null)]))

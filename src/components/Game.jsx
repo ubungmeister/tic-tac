@@ -23,6 +23,7 @@ const Game = () => {
     const { step, gameHistory, xIsNext, winnings, game } = useSelector(
         (state) => state
     )
+
     const history = [Array(9).fill(null)] // ?
     const winner = calculateWinner()
 
@@ -39,13 +40,16 @@ const Game = () => {
     const xO = xIsNext ? 'X' : 'O'
 
     const handleClick = (i) => {
+        console.log('i', i)
         const historyPoint =
             gameHistory.length > 0
                 ? gameHistory.slice(0, step + 1)
                 : history.slice(0, step + 1)
 
-        const current = historyPoint[step]
+        console.log('historyPoint', historyPoint)
 
+        const current = historyPoint[step]
+        console.log('current', current)
         const squares = [...current]
 
         if (winner || squares[i]) return
@@ -53,6 +57,7 @@ const Game = () => {
         squares[i] = xO
 
         // store game data to redux
+        console.log('squares', squares)
         addItemToStorage(squares)
         // store game step history to redux
         addHistory([...historyPoint, squares])

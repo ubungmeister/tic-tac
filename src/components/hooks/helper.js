@@ -4,6 +4,7 @@ const useHook = () => {
     const { step, gameHistory, game } = useSelector((state) => state)
 
     const boardSize = Math.sqrt(game.length)
+    console.log('boardSize', boardSize)
 
     const generateWinningLines = (size) => {
         let lines = []
@@ -17,9 +18,9 @@ const useHook = () => {
             for (let j = 0; j <= size - 3; j++) {
                 // Vertical
                 lines.push([
-                    j * size + i,
-                    (j + 1) * size + i,
-                    (j + 2) * size + i,
+                    i * size + j,
+                    (i + 1) * size + j,
+                    (i + 2) * size + j,
                 ])
             }
         }
@@ -40,6 +41,7 @@ const useHook = () => {
                         (i + 1) * size + j + 1,
                         i * size + j + 2,
                     ])
+                    console.log('l', lines)
                 }
             }
         }
@@ -50,6 +52,8 @@ const useHook = () => {
     const calculateWinner = () => {
         let squares = gameHistory[step]
         const lines = generateWinningLines(boardSize)
+
+        console.log('lines', lines)
 
         for (let i = 0; i < lines.length; i++) {
             const [a, b, c] = lines[i]

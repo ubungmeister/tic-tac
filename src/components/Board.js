@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 const Board = ({ onClick }) => {
     const { game } = useSelector((state) => state)
-
+    console.log('game', game)
     return (
         <>
             <div

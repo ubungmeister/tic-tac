@@ -46,16 +46,15 @@ export const Settings = ({ setSettings }) => {
         setGame(selectedOption.array)
     }
 
-    const closeOnEsc = (e) => {
-        if (e.key === 'Escape') {
-            setSettings(false)
-        }
-    }
-
     useEffect(() => {
+        const closeOnEsc = (e) => {
+            if (e.key === 'Escape') {
+                setSettings(false)
+            }
+        }
         document.addEventListener('keydown', closeOnEsc)
         return () => document.removeEventListener('keydown', closeOnEsc)
-    }, [])
+    }, [setSettings])
 
     return (
         <div className="modal-wrapper">

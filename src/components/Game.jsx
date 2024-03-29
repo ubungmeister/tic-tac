@@ -35,6 +35,7 @@ const Game = () => {
         if (winner === 'O') {
             addOWins()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [winner])
 
     const xO = xIsNext ? 'X' : 'O'
